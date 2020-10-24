@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         WelcomeScreen.routeName: (context) => WelcomeScreen(),
         SignInScreen.routeName: (context) => SignInScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
+        UserDashboardScreen.routeName: (context) => UserDashboardScreen(),
       },
     );
   }

@@ -27,20 +27,20 @@ class WelcomeScreenBody extends StatefulWidget {
 }
 
 class _WelcomeScreenBodyState extends State<WelcomeScreenBody> {
-  InternetConnectivityService internetConnectivityService =
-      InternetConnectivityService();
+  // InternetConnectivityService internetConnectivityService =
+  //     InternetConnectivityService();
 
-  @override
-  initState() {
-    internetConnectivityService.initInterNetConnectivitySubscription(context);
-    super.initState();
-  }
+  // @override
+  // initState() {
+  //   internetConnectivityService.initInterNetConnectivitySubscription(context);
+  //   super.initState();
+  // }
 
-  @override
-  dispose() {
-    internetConnectivityService.disposeSubscription();
-    super.dispose();
-  }
+  // @override
+  // dispose() {
+  //   internetConnectivityService.disposeSubscription();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class _WelcomeScreenBodyState extends State<WelcomeScreenBody> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 SignUpScreen.routeName,
-                (route) => true,
+                (route) => false,
               );
             },
             color: Colors.white,

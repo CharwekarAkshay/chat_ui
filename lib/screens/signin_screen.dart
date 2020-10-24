@@ -1,5 +1,7 @@
 import 'package:chat_ui/components/components.dart';
+import 'package:chat_ui/components/custom_snack_bar.dart';
 import 'package:chat_ui/constants.dart';
+import 'package:chat_ui/screens/screens.dart';
 import 'package:chat_ui/screens/signup_screen.dart';
 import 'package:chat_ui/services/services.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ class _SignInScreenState extends State<SignInScreen> {
   // Form Key
 
   Key formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   // TextField Cotnrollers
   TextEditingController _emailTextEditingController =
@@ -36,19 +39,33 @@ class _SignInScreenState extends State<SignInScreen> {
       (user) {
         authenticationService.logIn(user, password).then(
           (value) {
-            print('Verified User');
+            // * User has been login successfully we
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              UserDashboardScreen.routeName,
+              (route) => false,
+              arguments: user,
+            );
           },
         ).catchError(
           (error) {
-            // ! Show snackbar;
-            print('Incorrect password');
+            _scaffoldKey.currentState.showSnackBar(
+              snackBarBuilder(
+                  color: kErrorColor,
+                  text: 'Incorrect password',
+                  context: context),
+            );
           },
         );
       },
     ).catchError(
       (error) {
-        // ! Show snackbar;
-        print('No such user exist');
+        _scaffoldKey.currentState.showSnackBar(
+          snackBarBuilder(
+              color: kErrorColor,
+              text: 'Email address doesn\'t exist',
+              context: context),
+        );
       },
     );
   }
@@ -64,6 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Container(
           color: kBackgroundColor,

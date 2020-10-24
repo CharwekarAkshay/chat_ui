@@ -1,6 +1,4 @@
-import 'package:chat_ui/modals/user.dart';
-import 'package:chat_ui/services/services.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:chat_ui/modals/modals.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthenticationService {
@@ -89,11 +87,13 @@ class TemproryDatabase {
       userId: Uuid().v1(),
       userName: 'AksahyCharwekar',
       userEmail: 'akshay_charwekar@gmail.com',
+      avatarId: '1',
     ),
     new User(
       userId: Uuid().v1(),
       userName: 'NinadCharwekar',
       userEmail: 'ninad_charwekar@gmail.com',
+      avatarId: '2',
     ),
   ];
 

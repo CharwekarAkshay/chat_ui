@@ -10,4 +10,7 @@ class AvatarService {
     return 'assets/avatars/avatar_${_random.nextInt(_noOfAvatarInRepository) + 1}.png';
   }
 
+  static String getAvatarUrlWithId(String id) {
+    return 'assets/avatars/avatar_$id.png';
+  }
 }

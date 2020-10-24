@@ -7,7 +7,10 @@ SnackBar snackBarBuilder({
 }) {
   Size size = MediaQuery.of(context).size;
   return SnackBar(
-    content: Text(text),
+    content: Text(
+      text,
+      textAlign: TextAlign.center,
+    ),
     behavior: SnackBarBehavior.floating,
     elevation: 10,
     width: size.width * 0.9,

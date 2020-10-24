@@ -2,7 +2,6 @@ import 'package:chat_ui/components/components.dart';
 import 'package:chat_ui/components/large_button.dart';
 import 'package:chat_ui/constants.dart';
 import 'package:chat_ui/screens/screens.dart';
-import 'package:chat_ui/services/avatar_service.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
