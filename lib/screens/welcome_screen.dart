@@ -1,7 +1,7 @@
 import 'package:chat_ui/components/components.dart';
 import 'package:chat_ui/constants.dart';
 import 'package:chat_ui/screens/screens.dart';
-import 'package:chat_ui/services/internet_connectivity_service.dart';
+import 'package:chat_ui/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

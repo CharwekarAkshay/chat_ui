@@ -1,8 +1,4 @@
-import 'dart:async';
-
 import 'package:chat_ui/screens/screens.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'screens/welcome_screen.dart';
 

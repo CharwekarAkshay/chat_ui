@@ -1,5 +1,5 @@
 import 'package:chat_ui/constants.dart';
-import 'package:chat_ui/services/avatar_service.dart';
+import 'package:chat_ui/services/services.dart';
 import 'package:flutter/material.dart';
 
 class AvatarImageHolder extends StatelessWidget {

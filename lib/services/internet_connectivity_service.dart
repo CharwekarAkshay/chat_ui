@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 
 import 'package:chat_ui/components/custom_snack_bar.dart';
 import 'package:chat_ui/constants.dart';
