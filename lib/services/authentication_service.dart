@@ -12,36 +12,34 @@ class AuthenticationService {
 
   // * Implements all the methods related to user
 
-  User logIn(String userEmail, String password) {
+  Future<bool> logIn(User user, String password) async {
     // * We have to authenticate user with backend.
     // * We have to authenticate wiwht passwordManager
     // * After successful authentication we have to retrive complete userdata;
     // * after this we will be retrun complete user
 
-    // ! We ensure that we have non duplicate email id
-    User loggedInUser = TemproryDatabase.users
-        .singleWhere((user) => user.userEmail == userEmail);
-
     // ! On error we will be rreturning null so that we can show the error to the user;
-    var details = TemproryDatabase.passwordManager.singleWhere(
-      (element) {
-        if (element['userId'] == loggedInUser.userId &&
-            element['password'] == password) {
-          return true;
-        }
-        return false;
-      },
-    );
-
-    if(details == null) {
-      return loggedInUser;
+    try {
+      TemproryDatabase.passwordManager.singleWhere(
+        (element) {
+          if (element['userId'] == user.userId &&
+              element['password'] == password) {
+            return true;
+          }
+          return false;
+        },
+      );
+    } catch (error) {
+      throw error;
     }
-
-    return null;
   }
 
-  User signUp(
-      String userName, String userEmail, String password, String avatarId) {
+  Future<User> signUp(
+    String userName,
+    String userEmail,
+    String password,
+    String avatarId,
+  ) async {
     User newUser = new User(
       userId: uuid.v1(),
       userName: userName,
@@ -63,6 +61,17 @@ class AuthenticationService {
     this._isUserLoggedIn = true;
 
     return newUser;
+  }
+
+  Future<User> getUserByUserEmail(String userEmail) async {
+    User user;
+    try {
+      user = TemproryDatabase.users
+          .singleWhere((user) => user.userEmail == userEmail);
+    } catch (error) {
+      throw error;
+    }
+    return user;
   }
 
   User get user {

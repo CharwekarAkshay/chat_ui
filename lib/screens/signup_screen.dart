@@ -31,6 +31,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   FocusNode _passwordFocusNode = FocusNode();
 
   @override
+  void dispose() {
+    _userNameFocusNode.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(

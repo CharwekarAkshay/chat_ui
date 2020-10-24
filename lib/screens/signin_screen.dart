@@ -1,6 +1,7 @@
 import 'package:chat_ui/components/components.dart';
 import 'package:chat_ui/constants.dart';
 import 'package:chat_ui/screens/signup_screen.dart';
+import 'package:chat_ui/services/services.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -16,17 +17,49 @@ class _SignInScreenState extends State<SignInScreen> {
   Key formKey = GlobalKey<FormState>();
 
   // TextField Cotnrollers
-  TextEditingController _userNameTextEditingController =
-      new TextEditingController();
   TextEditingController _emailTextEditingController =
       new TextEditingController();
   TextEditingController _passwordTextEditingController =
       new TextEditingController();
 
   // Focus Nodes
-  FocusNode _userNameFocusNode = FocusNode();
   FocusNode _emailFocusNode = FocusNode();
   FocusNode _passwordFocusNode = FocusNode();
+
+  AuthenticationService authenticationService = new AuthenticationService();
+
+  _signInUser() {
+    var userEmail = _emailTextEditingController.text.trim();
+    var password = _passwordTextEditingController.text.trim();
+
+    authenticationService.getUserByUserEmail(userEmail).then(
+      (user) {
+        authenticationService.logIn(user, password).then(
+          (value) {
+            print('Verified User');
+          },
+        ).catchError(
+          (error) {
+            // ! Show snackbar;
+            print('Incorrect password');
+          },
+        );
+      },
+    ).catchError(
+      (error) {
+        // ! Show snackbar;
+        print('No such user exist');
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -83,7 +116,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             focusNode: _passwordFocusNode,
                             textInputAction: TextInputAction.send,
                             onFieldSubmitted: (_) {
-                              //TODO: Actual logic of sign in
+                              _signInUser();
                             },
                             validator: (value) {
                               if (value.length < 6) {
@@ -96,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(height: kDefaultPadding),
                           LargeButton(
                             color: kThemeColor,
-                            onTap: () {},
+                            onTap: _signInUser,
                             text: 'Sign In',
                             textColor: Colors.white,
                           ),
