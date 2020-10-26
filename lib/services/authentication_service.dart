@@ -87,7 +87,7 @@ class TemproryDatabase {
       userId: Uuid().v1(),
       userName: 'AksahyCharwekar',
       userEmail: 'akshay_charwekar@gmail.com',
-      avatarId: '1',
+      avatarId: '4',
     ),
     new User(
       userId: Uuid().v1(),
