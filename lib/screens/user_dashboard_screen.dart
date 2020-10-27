@@ -1,5 +1,6 @@
 import 'package:chat_ui/constants.dart';
 import 'package:chat_ui/modals/user.dart';
+import 'package:chat_ui/services/avatar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_ui/components/components.dart';
 
@@ -35,11 +36,13 @@ class UserDashboardScreen extends StatelessWidget {
                 children: [
                   Container(
                     height: 30,
+                    margin: const EdgeInsets.only(
+                        bottom: kDefaultPadding / 2, left: kDefaultPadding / 2),
                     child: Text(
                       'Chats',
                       style: TextStyle(
                         fontSize: 30,
-                        fontWeight: FontWeight.bold,                        
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -47,15 +50,7 @@ class UserDashboardScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: 12,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          color: Colors.green,
-                          height: 70,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: kDefaultPadding / 2),
-                          child: Center(
-                            child: Text('$index'),
-                          ),
-                        );
+                        return ChatTile();
                       },
                     ),
                   ),
@@ -69,6 +64,69 @@ class UserDashboardScreen extends StatelessWidget {
   }
 }
 
-/*
- 
- */
+class ChatTile extends StatelessWidget {
+  const ChatTile({
+    Key key,
+  }) : super(key: key);
+
+  String messageTrimmer(String message) {
+    if (message.length > 30) {
+      message = message.substring(0, 30) + '...';
+    }
+    return message;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        // TODO: What to do when we click on chat window
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: kDefaultPadding / 2),
+        padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 3),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: 0.3,
+              color: kThemeColor.withOpacity(0.5),
+            ),
+          ),
+        ),
+        child: Row(
+          children: [
+            ProfileAvatar(
+              assetImage: AvatarService.getRandomAvatarUrl(),
+              radius: 35,
+            ),
+            SizedBox(width: kDefaultPadding),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Random Name',
+                    style: Theme.of(context).textTheme.headline6.copyWith(
+                          color: kTextColor,
+                        ),
+                  ),
+                  SizedBox(height: kDefaultPadding / 3),
+                  Text(
+                    messageTrimmer('This was the last message from the user.'),
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(
+                      color: kTextColor.withOpacity(0.5),
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
