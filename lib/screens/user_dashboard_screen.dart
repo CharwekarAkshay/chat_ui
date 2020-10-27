@@ -3,10 +3,6 @@ import 'package:chat_ui/modals/user.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_ui/components/components.dart';
 
-import '../constants.dart';
-import '../constants.dart';
-import '../constants.dart';
-
 class UserDashboardScreen extends StatelessWidget {
   static const routeName = '/user-dashboard';
 
@@ -23,12 +19,47 @@ class UserDashboardScreen extends StatelessWidget {
             UserWithAvatarAndGreeting(user: user),
             Container(
               height: size.height * 0.8,
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding,
+                vertical: kDefaultPadding,
+              ),
               decoration: BoxDecoration(
                 color: kBackgroundColor,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50) ,
-                  topRight: Radius.circular(50) ,
-                )
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 30,
+                    child: Text(
+                      'Chats',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,                        
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: 12,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          color: Colors.green,
+                          height: 70,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: kDefaultPadding / 2),
+                          child: Center(
+                            child: Text('$index'),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -39,11 +70,5 @@ class UserDashboardScreen extends StatelessWidget {
 }
 
 /*
-   Container(
-            padding: const EdgeInsets.only(
-                top: kDefaultPadding * 2,
-                right: kDefaultPadding,
-                left: kDefaultPadding),
-            child:
-          ),
+ 
  */

@@ -1,3 +1,4 @@
+import 'package:chat_ui/components/components.dart';
 import 'package:chat_ui/constants.dart';
 import 'package:chat_ui/modals/user.dart';
 import 'package:flutter/material.dart';
@@ -28,20 +29,12 @@ class UserWithAvatarAndGreeting extends StatelessWidget {
     return Container(
       height: size.height * 0.2,
       padding: const EdgeInsets.symmetric(
-        //  vertical: kDefaultPadding * 2,
-        horizontal: kDefaultPadding * 2,
+        horizontal: kDefaultPadding,
       ),
-      // padding: const EdgeInsets.symmetric(
-      //   horizontal: kDefaultPadding * 2,
-      //   vertical: kDefaultPadding * 2,
-      // ),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundColor: Colors.white,
-            backgroundImage:
-                AssetImage(AvatarService.getAvatarUrlWithId(user.avatarId)),
+          ProfileAvatar(
+            assetImage: AvatarService.getAvatarUrlWithId(user.avatarId),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
