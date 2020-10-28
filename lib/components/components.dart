@@ -4,3 +4,4 @@ export 'avatar_image_holder.dart';
 export 'custom_text_form_field.dart';
 export 'user_with_avatar_and_greetings.dart';
 export 'profile_avatar.dart';
+export 'chat_tile.dart';

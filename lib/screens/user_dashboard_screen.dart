@@ -50,77 +50,18 @@ class UserDashboardScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: 12,
                       itemBuilder: (BuildContext context, int index) {
-                        return ChatTile();
+                        return ChatTile(
+                          userName: 'Random Name',
+                          lastMessage:
+                              'This was the last message from the user.',
+                          assetImage: AvatarService.getRandomAvatarUrl(),
+                          onTap: () {
+                            // TODO: What to do when we click on chat window
+                          },
+                        );
                       },
                     ),
                   ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ChatTile extends StatelessWidget {
-  const ChatTile({
-    Key key,
-  }) : super(key: key);
-
-  String messageTrimmer(String message) {
-    if (message.length > 30) {
-      message = message.substring(0, 30) + '...';
-    }
-    return message;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // TODO: What to do when we click on chat window
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: kDefaultPadding / 2),
-        padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 3),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              width: 0.3,
-              color: kThemeColor.withOpacity(0.5),
-            ),
-          ),
-        ),
-        child: Row(
-          children: [
-            ProfileAvatar(
-              assetImage: AvatarService.getRandomAvatarUrl(),
-              radius: 35,
-            ),
-            SizedBox(width: kDefaultPadding),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Random Name',
-                    style: Theme.of(context).textTheme.headline6.copyWith(
-                          color: kTextColor,
-                        ),
-                  ),
-                  SizedBox(height: kDefaultPadding / 3),
-                  Text(
-                    messageTrimmer('This was the last message from the user.'),
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(
-                      color: kTextColor.withOpacity(0.5),
-                      fontSize: 16,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  )
                 ],
               ),
             ),
