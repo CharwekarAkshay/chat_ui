@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-@override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ChatApp UI',
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         SignInScreen.routeName: (context) => SignInScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
         UserDashboardScreen.routeName: (context) => UserDashboardScreen(),
+        SearchUserScreen.routeName: (context) => SearchUserScreen(),
       },
     );
   }

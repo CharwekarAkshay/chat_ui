@@ -1,6 +1,7 @@
 import 'package:chat_ui/components/components.dart';
 import 'package:chat_ui/constants.dart';
 import 'package:chat_ui/modals/user.dart';
+import 'package:chat_ui/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_ui/services/services.dart';
 
@@ -36,30 +37,54 @@ class UserWithAvatarAndGreeting extends StatelessWidget {
           ProfileAvatar(
             assetImage: AvatarService.getAvatarUrlWithId(user.avatarId),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  getGreetings(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        getGreetings(),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        user.userName,
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  user.userName,
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                  Container(
+                    padding: const EdgeInsets.all(kDefaultPadding / 2),
+                    decoration: BoxDecoration(
+                      color: kBackgroundColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(SearchUserScreen.routeName);
+                      },
+                      child: Icon(
+                        Icons.search,
+                        color: kTextColor,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
